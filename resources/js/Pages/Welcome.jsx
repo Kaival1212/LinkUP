@@ -14,7 +14,7 @@ const Welcome = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        router.post('/joinWaitlist', { email });
+        router.post(route('waitlist.store'), { email });
         setIsSubmitted(true);
 
         setTimeout(() => {
