@@ -2,7 +2,7 @@ import { Head, router } from '@inertiajs/react';
 import { Heart } from 'lucide-react';
 import { useState } from 'react';
 import Modal from 'react-modal';
-import svg from '../../../public/build/assets/Add a little bit of body text.svg'
+import svg from '../../svgs/Add a little bit of body text.svg'
 
 // Bind modal to your appElement for accessibility
 Modal.setAppElement('#app');
