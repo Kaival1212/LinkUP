@@ -16,7 +16,7 @@ class WaitlistUserController extends Controller
         if ($emailExist) {
             return Redirect::back()->withErrors(['email' => 'Email already exists']);
         }
-
+        
         $request->validate([
             'email' => 'required|email|unique:waitlist_users,email',
         ]);

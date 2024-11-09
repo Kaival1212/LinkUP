@@ -1,14 +1,15 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WaitlistUserController;
-use Illuminate\Foundation\Application;
+use App\Http\Controllers\MainPageController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::get('/', function () {
-    return Inertia::render('Welcome');
+    return Inertia::render('BetaWelcome');
 });
+
+Route::get('/beta', [MainPageController::class, 'index'])->name('main.index');
 
 Route::post('/joinWaitlist', [WaitlistUserController::class, 'store'])->name('waitlist.store');
 
@@ -22,4 +23,4 @@ Route::post('/joinWaitlist', [WaitlistUserController::class, 'store'])->name('wa
 //    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 //});
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

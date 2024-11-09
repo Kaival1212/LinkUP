@@ -1,148 +1,98 @@
-import { Head ,router} from '@inertiajs/react';
-import { Heart } from 'lucide-react';
-import { useState } from 'react';
-import Modal from 'react-modal';
+import React from 'react';
+import { Head } from '@inertiajs/react';
+import Navbar from '@/Layouts/Navbar';
+import { Construction, Hammer, Wrench, Cog } from 'lucide-react';
 
-// Bind modal to your appElement for accessibility
-Modal.setAppElement('#app');
-
-const Welcome = () => {
-    const [modalIsOpen, setModalIsOpen] = useState(false);
-    const [email, setEmail] = useState('');
-    const [isSubmitted, setIsSubmitted] = useState(false);
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-
-        router.post(route('waitlist.store'), { email });
-        setIsSubmitted(true);
-
-        setTimeout(() => {
-            setIsSubmitted(false);
-            setModalIsOpen(false);
-            setEmail('');
-        }, 3000);
-    };
-
+function Welcome({ auth }) {
     return (
-        <div className="min-h-screen bg-gradient-to-br from-pink-100 to-purple-100">
-            <Head title="Future of Dating" />
+        <>
+            <Head title="Welcome" />
+            <Navbar auth={auth} />
 
-            <div className="container mx-auto px-4 py-16">
-                <div className="mx-auto max-w-3xl text-center">
-                    <div className="mb-6 flex justify-center">
-                        <Heart className="h-16 w-16 animate-pulse text-pink-500" />
-                    </div>
+            <div className="min-h-[calc(100vh-4rem)] bg-gradient-to-br from-pink-100 to-purple-100">
+                <div className="container mx-auto px-4 py-16">
+                    <div className="mx-auto max-w-2xl text-center">
+                        <div className="mb-8 flex justify-center space-x-4">
+                            <Construction className="h-16 w-16 text-pink-500 animate-bounce" />
+                            <Wrench className="h-16 w-16 text-purple-500 animate-bounce delay-100" />
+                            <Hammer className="h-16 w-16 text-pink-500 animate-bounce delay-200" />
+                        </div>
 
-                    <h1 className="mb-4 bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-5xl font-bold text-transparent">
-                        Link Up
-                    </h1>
+                        <h1 className="mb-6 bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-5xl font-bold text-transparent">
+                            Working on Something Special
+                        </h1>
 
-                    <div className="mb-8 inline-block rounded-full bg-purple-100 px-4 py-1 font-semibold text-purple-600">
-                        Beta Coming Soon
-                    </div>
+                        <div className="mb-8 inline-block rounded-full bg-purple-100 px-4 py-1 font-semibold text-purple-600">
+                            Coming Soon
+                        </div>
 
-                    <div className="space-y-6">
-                        <h2 className="text-2xl font-semibold text-gray-800">
-                            Welcome to the Future of Dating
-                        </h2>
-
-                        <p className="text-lg leading-relaxed text-gray-600">
-                            Experience authentic connections without any barriers. Unlike other dating apps,
-                            Link Up is completely free - no subscriptions, no hidden fees, just genuine relationships.
+                        <p className="mb-8 text-lg leading-relaxed text-gray-600">
+                            Our team is hard at work building this feature. We're making sure everything is perfect before we launch. Check back soon!
                         </p>
+
+                        <div className="relative mx-auto max-w-md">
+                            <div className="h-4 overflow-hidden rounded-full bg-purple-100">
+                                <div className="h-full w-1/2 animate-pulse rounded-full bg-gradient-to-r from-pink-500 to-purple-600"></div>
+                            </div>
+                            <div className="mt-2 flex justify-between text-sm text-gray-600">
+                                <span>Progress</span>
+                                <span>50%</span>
+                            </div>
+                        </div>
 
                         <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3">
                             {[
-                                { title: '100% Free', desc: 'No subscriptions or hidden charges ever' },
-                                { title: 'Real Connections', desc: 'Focus on authentic relationships' },
-                                { title: 'Safe & Secure', desc: 'Your privacy is our priority' }
+                                {
+                                    title: 'Building',
+                                    desc: 'Crafting the perfect experience',
+                                    icon: <Hammer className="h-6 w-6" />
+                                },
+                                {
+                                    title: 'Testing',
+                                    desc: 'Ensuring everything works flawlessly',
+                                    icon: <Cog className="h-6 w-6 animate-spin" />
+                                },
+                                {
+                                    title: 'Polishing',
+                                    desc: 'Adding the final touches',
+                                    icon: <Construction className="h-6 w-6" />
+                                }
                             ].map((feature, index) => (
-                                <div key={index} className="rounded-xl bg-white p-6 shadow-md transition-shadow hover:shadow-lg">
-                                    <div className="mb-2 font-bold text-pink-500">{feature.title}</div>
-                                    <p className="text-gray-600">{feature.desc}</p>
+                                <div
+                                    key={index}
+                                    className="rounded-xl bg-white p-6 shadow-md transition-shadow hover:shadow-lg"
+                                >
+                                    <div className="mb-4 flex justify-center text-pink-500">
+                                        {feature.icon}
+                                    </div>
+                                    <div className="mb-2 text-center font-bold text-gray-800">
+                                        {feature.title}
+                                    </div>
+                                    <p className="text-center text-gray-600">
+                                        {feature.desc}
+                                    </p>
                                 </div>
                             ))}
                         </div>
 
-                        <div className="mt-12">
-                            <button
-                                onClick={() => setModalIsOpen(true)}
-                                className="rounded-full bg-pink-500 px-8 py-3 font-semibold text-white shadow-lg transition-all hover:bg-pink-600 hover:shadow-xl"
+                        <div className="mt-16 text-center text-sm text-gray-600">
+                            Want to be notified when we launch?{' '}
+                            <a
+                                href="#"
+                                className="font-semibold text-pink-500 hover:text-pink-600 transition-colors"
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    // Add your notification signup logic here
+                                }}
                             >
-                                Join the Waitlist
-                            </button>
+                                Join our waitlist
+                            </a>
                         </div>
-
-                        <Modal
-                            isOpen={modalIsOpen}
-                            onRequestClose={() => setModalIsOpen(false)}
-                            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-lg p-6 w-full max-w-md shadow-xl"
-                            overlayClassName="fixed inset-0 bg-black bg-opacity-50"
-                            contentLabel="Waitlist Signup Modal"
-                        >
-                            {!isSubmitted ? (
-                                <div className="space-y-4">
-                                    <div className="flex justify-between items-center">
-                                        <h2 className="text-xl font-semibold text-gray-900">Join Our Waitlist</h2>
-                                        <button
-                                            onClick={() => setModalIsOpen(false)}
-                                            className="text-gray-400 hover:text-gray-500"
-                                        >
-                                            ✕
-                                        </button>
-                                    </div>
-
-                                    <p className="text-gray-600">
-                                        Be the first to know when Link Up launches.
-                                    </p>
-
-                                    <form onSubmit={handleSubmit} className="space-y-4">
-                                        <div>
-                                            <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                                                Email
-                                            </label>
-                                            <input
-                                                type="email"
-                                                id="email"
-                                                value={email}
-                                                onChange={(e) => setEmail(e.target.value)}
-                                                className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-pink-500 focus:outline-none focus:ring-1 focus:ring-pink-500"
-                                                placeholder="Enter your email"
-                                                required
-                                            />
-                                        </div>
-                                        <div className="flex justify-end space-x-2">
-                                            <button
-                                                type="button"
-                                                onClick={() => setModalIsOpen(false)}
-                                                className="rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50"
-                                            >
-                                                Cancel
-                                            </button>
-                                            <button
-                                                type="submit"
-                                                className="rounded-md bg-pink-500 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-pink-600"
-                                            >
-                                                Join Waitlist
-                                            </button>
-                                        </div>
-                                    </form>
-                                </div>
-                            ) : (
-                                <div className="flex flex-col items-center justify-center py-6 space-y-4">
-                                    <div className="text-green-500 text-5xl">✓</div>
-                                    <p className="text-center font-medium text-gray-900">
-                                        Thanks for joining! We'll be in touch soon.
-                                    </p>
-                                </div>
-                            )}
-                        </Modal>
                     </div>
                 </div>
             </div>
-        </div>
+        </>
     );
-};
+}
 
 export default Welcome;
