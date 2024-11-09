@@ -1,8 +1,8 @@
-import React,{useState} from 'react'
+import React, { useState } from 'react'
 import { MessageCircle, Users, User, LogOut } from 'lucide-react';
 import { Head, Link } from '@inertiajs/react'
 
-function Navbar({auth}) {
+function Navbar({ auth }) {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
@@ -21,21 +21,24 @@ function Navbar({auth}) {
 
                     {/* Navigation Links */}
                     <div className="hidden md:flex items-center space-x-8">
-                        <Link
-                            href={route('main.index')}
-                            className="flex items-center space-x-2 text-gray-600 hover:text-pink-500 transition-colors"
-                        >
-                            <MessageCircle className="h-5 w-5" />
-                            <span>Chats</span>
-                        </Link>
+                        {auth?.user &&
+                            <><Link
+                                href={route('main.index')}
+                                className="flex items-center space-x-2 text-gray-600 hover:text-pink-500 transition-colors"
+                            >
+                                <MessageCircle className="h-5 w-5" />
+                                <span>Chats</span>
+                            </Link>
 
-                        <Link
-                            href={route('main.index')}
-                            className="flex items-center space-x-2 text-gray-600 hover:text-pink-500 transition-colors"
-                        >
-                            <Users className="h-5 w-5" />
-                            <span>Find Your Partner</span>
-                        </Link>
+                                <Link
+                                    href={route('main.index')}
+                                    className="flex items-center space-x-2 text-gray-600 hover:text-pink-500 transition-colors"
+                                >
+                                    <Users className="h-5 w-5" />
+                                    <span>Find Your Partner</span>
+                                </Link>
+                            </>
+                        }
 
                         {auth?.user ? (
                             <div className="relative">
