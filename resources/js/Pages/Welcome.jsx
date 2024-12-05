@@ -6,7 +6,7 @@ import LoginRequest from '@/Layouts/LoginRequest';
 
 function Welcome({ auth }) {
     return (
-        <div className="min-h-screen flex flex-col bg-gradient-to-br from-pink-100 to-purple-100">
+        <div className="flex min-h-screen flex-col bg-gradient-to-br from-pink-100 to-purple-100">
             <Head title="Welcome" />
             <Navbar auth={auth} />
             <main className="flex-grow pt-16">

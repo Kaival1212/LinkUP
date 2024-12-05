@@ -29,9 +29,8 @@ function Navbar({ auth }) {
     }, []);
 
     return (
-        <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-            scrolled ? 'bg-white/80 backdrop-blur-md shadow-lg' : 'bg-white shadow-md'
-        }`}>
+        <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white/80 backdrop-blur-md shadow-lg' : 'bg-white shadow-md'
+            }`}>
             <div className="container mx-auto px-4">
                 <div className="flex h-16 items-center justify-between">
                     {/* Logo/Brand */}
@@ -58,11 +57,19 @@ function Navbar({ auth }) {
                                 </Link>
 
                                 <Link
-                                    href={route('main.index')}
+                                    href={route('main.findPartner')}
                                     className="flex items-center space-x-2 text-gray-600 hover:text-pink-500 transition-colors group"
                                 >
                                     <Users className="h-5 w-5 group-hover:scale-110 transition-transform" />
                                     <span>Find Your Partner</span>
+                                </Link>
+
+                                <Link
+                                    href={route('connections.index')}
+                                    className="flex items-center space-x-2 text-gray-600 hover:text-pink-500 transition-colors group"
+                                >
+                                    <Heart className="h-5 w-5 group-hover:scale-110 transition-transform" />
+                                    <span>Connections</span>
                                 </Link>
                             </>
                         )}
@@ -122,23 +129,19 @@ function Navbar({ auth }) {
                     >
                         <span className="sr-only">Open main menu</span>
                         <div className="w-6 h-5 relative flex flex-col justify-between">
-                            <span className={`w-full h-0.5 bg-current transform transition-all duration-300 ${
-                                isOpen ? 'rotate-45 translate-y-2' : ''
-                            }`} />
-                            <span className={`w-full h-0.5 bg-current transition-all duration-300 ${
-                                isOpen ? 'opacity-0' : ''
-                            }`} />
-                            <span className={`w-full h-0.5 bg-current transform transition-all duration-300 ${
-                                isOpen ? '-rotate-45 -translate-y-2' : ''
-                            }`} />
+                            <span className={`w-full h-0.5 bg-current transform transition-all duration-300 ${isOpen ? 'rotate-45 translate-y-2' : ''
+                                }`} />
+                            <span className={`w-full h-0.5 bg-current transition-all duration-300 ${isOpen ? 'opacity-0' : ''
+                                }`} />
+                            <span className={`w-full h-0.5 bg-current transform transition-all duration-300 ${isOpen ? '-rotate-45 -translate-y-2' : ''
+                                }`} />
                         </div>
                     </button>
                 </div>
 
                 {/* Mobile Menu */}
-                <div className={`md:hidden overflow-hidden transition-all duration-300 ${
-                    isOpen ? 'max-h-96' : 'max-h-0'
-                }`}>
+                <div className={`md:hidden overflow-hidden transition-all duration-300 ${isOpen ? 'max-h-96' : 'max-h-0'
+                    }`}>
                     <div className="space-y-2 px-2 pb-3 pt-2">
                         {auth?.user && (
                             <>

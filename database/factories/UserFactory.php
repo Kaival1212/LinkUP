@@ -23,13 +23,19 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
-        return [
-            'name' => fake()->name(),
-            'email' => fake()->unique()->safeEmail(),
-            'email_verified_at' => now(),
-            'password' => static::$password ??= Hash::make('password'),
-            'remember_token' => Str::random(10),
-        ];
+
+            return [
+                'name' => $this->faker->name,
+                'email' => $this->faker->unique()->safeEmail,
+                'email_verified_at' => $this->faker->optional()->dateTime,
+                'password' => bcrypt('password'), // You can use Hash::make('password') as well for security
+                'sex' => $this->faker->randomElement(['male', 'female']),
+                'preference' => $this->faker->randomElement(['male', 'female',]),
+                'dateOfBirth' => $this->faker->date('Y-m-d', '-18 years'), // Ensures user is at least 18
+                'profile_image' => $this->faker->optional()->imageUrl(640, 480, 'people'),
+                'remember_token' => Str::random(10),
+            ];
+
     }
 
     /**

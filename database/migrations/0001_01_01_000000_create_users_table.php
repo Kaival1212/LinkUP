@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('sex');
             $table->string('preference');
+            $table->string('profile_image')->nullable();
             $table->date('dateOfBirth');
             $table->rememberToken();
             $table->timestamps();

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Mail\JoinedWaitingList;
 use App\Mail\JoinWaitListUserMail;
 use App\Models\WaitlistUser;
 use Illuminate\Http\Request;
@@ -26,10 +25,11 @@ class WaitlistUserController extends Controller
         ]);
 
         try {
+
             $waitListUser = WaitlistUser::create($request->only('email'));
-
+            // dd($waitListUser);
             Mail::to($waitListUser->email)->send(new JoinWaitListUserMail($waitListUser));
-
+            // dd('Mail sent');
             return Redirect::back()->with('success', 'You have been added to the waitlist');
         } catch (\Exception $e) {
             return response($e->getMessage(), 500);
